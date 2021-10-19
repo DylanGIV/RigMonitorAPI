@@ -1,0 +1,33 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:59921",
+      "sslPort": 0
+    }
+  },
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "RIG_MONITOR_DB_CONNECTION_STRING": "Host=ec2-35-153-114-74.compute-1.amazonaws.com;Port=5432;Username=ugphqxuevbmbmz;Password=a9b77165426d953f29025c7dcc8b0058db21dca8b50b42f1e955b9eab33bcdac;Database=ddlohddo84m0up;SSL Mode=Require;Trust Server Certificate=true",
+        "RIG_MONITOR_JWT_SECRET": "VEryStrONGKAutHENTICATIONKEy",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "JWTAuthenticationWithSwagger": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "weatherforecast",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": "true",
+      "applicationUrl": "http://localhost:5000"
+    }
+  }
+}
