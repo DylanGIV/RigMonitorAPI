@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RigMonitorAPI.Authentication;
@@ -9,9 +10,10 @@ using RigMonitorAPI.Authentication;
 namespace RigMonitorAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211025221440_edited attribute in devicestatsmodel")]
+    partial class editedattributeindevicestatsmodel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -290,8 +292,8 @@ namespace RigMonitorAPI.Migrations
                     b.Property<short>("MemoryClockSpeed")
                         .HasColumnType("smallint");
 
-                    b.Property<float>("PowerUsage")
-                        .HasColumnType("real");
+                    b.Property<decimal>("PowerUsage")
+                        .HasColumnType("numeric(3,1)");
 
                     b.Property<short>("Temperature")
                         .HasColumnType("smallint");

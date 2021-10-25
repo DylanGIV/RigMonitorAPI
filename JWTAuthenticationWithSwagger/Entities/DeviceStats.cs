@@ -11,9 +11,7 @@ namespace RigMonitorAPI.Entities
     {
         public DateTime Timestamp { get; set; }
         public short Temperature { get; set; }
-
-        [Column(TypeName = "decimal(3, 1)")]
-        public decimal PowerUsage { get; set; }
+        public float PowerUsage { get; set; }
         public short FanSpeed { get; set; }
         public short MemoryClockSpeed { get; set; }
         public short CoreClockSpeed { get; set; }

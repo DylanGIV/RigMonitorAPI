@@ -28,11 +28,11 @@ namespace RigMonitorAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<DeviceStats>> PostDeviceStats([FromBody]AddDeviceStatsRequestModel addDeviceStatsRequest)
+        public async Task<ActionResult<DeviceStats>> PostDevicesStats([FromBody]AddDeviceStatsRequestModel addDeviceStatsRequest)
         {
             var devicesStats = new List<DeviceStats>();
 
-            foreach (var deviceStats in addDeviceStatsRequest.DeviceStats)
+            foreach (var deviceStats in addDeviceStatsRequest.DevicesStats)
             {
                 var newDeviceStats = new DeviceStats
                 {

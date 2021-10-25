@@ -9,7 +9,7 @@ namespace RigMonitorAPI.Models.AddDeviceStatsRequest
     {
         public string DeviceId { get; set; }
         public short Temperature { get; set; }
-        public decimal PowerUsage { get; set; }
+        public float PowerUsage { get; set; }
         public short FanSpeed { get; set; }
         public short MemoryClockSpeed { get; set; }
         public short CoreClockSpeed { get; set; }
