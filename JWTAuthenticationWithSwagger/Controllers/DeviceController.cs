@@ -40,15 +40,21 @@ namespace RigMonitorAPI.Controllers
 
             foreach (var device in addDeviceRequest.Devices)
             {
-                var newDevice = new Device
-                {
-                    DeviceId = device.DeviceId,
-                    DeviceName = device.DeviceName,
-                    DeviceDescription = device.DeviceDescription,
-                    RigId = device.RigId
-                };
+                var matchingDevice = _context.Device.Where(d => d.RigId == device.RigId && d.Rig.UserId == userId && d.DeviceId == device.DeviceId);
 
-                devices.Add(newDevice);
+                if (!matchingDevice.Any())
+                {
+                    var newDevice = new Device
+                    {
+                        DeviceId = device.DeviceId,
+                        DeviceName = device.DeviceName,
+                        DeviceDescription = device.DeviceDescription,
+                        RigId = device.RigId
+                    };
+
+                    devices.Add(newDevice);
+
+                }
             }
 
             _context.Device.AddRange(devices);
