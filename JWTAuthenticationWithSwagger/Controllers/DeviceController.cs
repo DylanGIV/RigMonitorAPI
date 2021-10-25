@@ -53,7 +53,6 @@ namespace RigMonitorAPI.Controllers
                     };
 
                     devices.Add(newDevice);
-
                 }
             }
 
