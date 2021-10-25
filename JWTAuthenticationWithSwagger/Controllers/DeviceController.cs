@@ -40,9 +40,9 @@ namespace RigMonitorAPI.Controllers
 
             foreach (var device in addDeviceRequest.Devices)
             {
-                var matchingDevice = _context.Device.Where(d => d.RigId == device.RigId && d.Rig.UserId == userId && d.DeviceId == device.DeviceId);
+                var matchingDevice = _context.Device.Any(d => d.RigId == device.RigId && d.Rig.UserId == userId && d.DeviceId == device.DeviceId);
 
-                if (!matchingDevice.Any())
+                if (!matchingDevice)
                 {
                     var newDevice = new Device
                     {
@@ -54,6 +54,11 @@ namespace RigMonitorAPI.Controllers
 
                     devices.Add(newDevice);
                 }
+            }
+               
+            if (!devices.Any())
+            {
+                return Ok(new Response { Status = "Success", Message = "No Devices Added" });
             }
 
             _context.Device.AddRange(devices);
