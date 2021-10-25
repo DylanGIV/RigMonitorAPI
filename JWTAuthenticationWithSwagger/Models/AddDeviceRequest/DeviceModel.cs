@@ -10,6 +10,6 @@ namespace RigMonitorAPI.Models.AddDeviceRequest
         public string DeviceName { get; set; }
         public string DeviceDescription { get; set; }
         public string DeviceId { get; set; }
-        public long RigId { get; set; }
+        public string RigId { get; set; }
     }
 }

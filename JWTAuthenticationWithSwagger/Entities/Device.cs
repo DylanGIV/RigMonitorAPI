@@ -10,7 +10,7 @@ namespace RigMonitorAPI.Entities
         public string DeviceId { get; set; } 
         public string DeviceName { get; set; }
         public string DeviceDescription { get; set; }
-        public long RigId { get; set; }
+        public string RigId { get; set; }
         public bool Active { get; set; }
         public virtual Rig Rig { get; set; }
         public List<DeviceStats> DeviceStats { get; set; }

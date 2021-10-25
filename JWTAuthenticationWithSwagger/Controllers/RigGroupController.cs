@@ -86,7 +86,7 @@ namespace RigMonitorAPI.Controllers
         }
 
         [HttpGet("rigId")]
-        public ActionResult<RigGroup> GetRigGroups(long rigId)
+        public ActionResult<RigGroup> GetRigGroups(string rigId)
         {
             var userId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             var rigGroup = _context.RigGroup.Where(rg => rg.Rigs.Contains(_context.Rig.FirstOrDefault(r => r.RigId == rigId)));

@@ -8,7 +8,7 @@ namespace RigMonitorAPI.Entities
 {
     public class Rig
     {
-        public long RigId { get; set; }
+        public string RigId { get; set; }
         public string RigName { get; set; }
         public string RigDescription { get; set; }
         public string UserId { get; set; }

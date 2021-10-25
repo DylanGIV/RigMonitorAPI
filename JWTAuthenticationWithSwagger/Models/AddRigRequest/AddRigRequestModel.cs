@@ -7,6 +7,7 @@ namespace RigMonitorAPI.Models.Request
 {
     public class AddRigRequestModel
     {
+        public string RigId { get; set; }
         public string RigName { get; set; }
         public string RigDescription { get; set; }
     }

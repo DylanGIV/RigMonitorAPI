@@ -10,7 +10,7 @@ using RigMonitorAPI.Authentication;
 namespace RigMonitorAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210820072049_initial")]
+    [Migration("20211025164836_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,21 @@ namespace RigMonitorAPI.Migrations
                 .UseIdentityByDefaultColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.7");
+
+            modelBuilder.Entity("DeviceDeviceGroup", b =>
+                {
+                    b.Property<long>("DeviceGroupsDeviceGroupId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("DevicesDeviceId")
+                        .HasColumnType("text");
+
+                    b.HasKey("DeviceGroupsDeviceGroupId", "DevicesDeviceId");
+
+                    b.HasIndex("DevicesDeviceId");
+
+                    b.ToTable("DeviceDeviceGroup");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -215,60 +230,169 @@ namespace RigMonitorAPI.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("RigMonitorAPI.Models.DeviceStats", b =>
+            modelBuilder.Entity("RigMonitorAPI.Entities.Device", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .UseIdentityByDefaultColumn();
+                    b.Property<string>("DeviceId")
+                        .HasColumnType("text");
 
-                    b.Property<long>("ClockMemory")
-                        .HasColumnType("bigint");
+                    b.Property<bool>("Active")
+                        .HasColumnType("boolean");
 
-                    b.Property<long>("ClockSM")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("DeviceId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("DeviceDescription")
+                        .HasColumnType("text");
 
                     b.Property<string>("DeviceName")
                         .HasColumnType("text");
 
-                    b.Property<long>("FanSpeed")
-                        .HasColumnType("bigint");
+                    b.Property<string>("RigId")
+                        .HasColumnType("text");
 
-                    b.Property<long>("PowerLimit")
-                        .HasColumnType("bigint");
+                    b.HasKey("DeviceId");
 
-                    b.Property<long>("PowerUsage")
-                        .HasColumnType("bigint");
+                    b.HasIndex("RigId");
+
+                    b.ToTable("Device");
+                });
+
+            modelBuilder.Entity("RigMonitorAPI.Entities.DeviceGroup", b =>
+                {
+                    b.Property<long>("DeviceGroupId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<string>("DeviceGroupDescription")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DeviceGroupName")
+                        .HasColumnType("text");
+
+                    b.HasKey("DeviceGroupId");
+
+                    b.ToTable("DeviceGroup");
+                });
+
+            modelBuilder.Entity("RigMonitorAPI.Entities.DeviceStats", b =>
+                {
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("DeviceId")
+                        .HasColumnType("text");
+
+                    b.Property<short>("CoreClockSpeed")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("DeviceUsage")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("FanSpeed")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("MemoryClockSpeed")
+                        .HasColumnType("smallint");
+
+                    b.Property<decimal>("PowerUsage")
+                        .HasColumnType("numeric(3,1)");
+
+                    b.Property<short>("Temperature")
+                        .HasColumnType("smallint");
+
+                    b.HasKey("Timestamp", "DeviceId");
+
+                    b.HasIndex("DeviceId");
+
+                    b.ToTable("DeviceStats");
+                });
+
+            modelBuilder.Entity("RigMonitorAPI.Entities.Rig", b =>
+                {
+                    b.Property<string>("RigId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RigDescription")
+                        .HasColumnType("text");
 
                     b.Property<string>("RigName")
                         .HasColumnType("text");
 
-                    b.Property<long>("Temperature")
-                        .HasColumnType("bigint");
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
 
-                    b.Property<long>("TemperatureHardLimit")
-                        .HasColumnType("bigint");
+                    b.HasKey("RigId");
 
-                    b.Property<long>("TemperatureSoftLimit")
-                        .HasColumnType("bigint");
+                    b.HasIndex("UserId");
 
-                    b.Property<long>("Timestamp")
-                        .HasColumnType("bigint");
+                    b.ToTable("Rig");
+                });
+
+            modelBuilder.Entity("RigMonitorAPI.Entities.RigGroup", b =>
+                {
+                    b.Property<long>("RigGroupId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<string>("RigGroupDescription")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RigGroupName")
+                        .HasColumnType("text");
+
+                    b.HasKey("RigGroupId");
+
+                    b.ToTable("RigGroup");
+                });
+
+            modelBuilder.Entity("RigMonitorAPI.Entities.WalletAddress", b =>
+                {
+                    b.Property<string>("Address")
+                        .HasColumnType("text");
 
                     b.Property<string>("UserId")
                         .HasColumnType("text");
 
-                    b.Property<long>("Utilization")
-                        .HasColumnType("bigint");
+                    b.Property<string>("PoolId")
+                        .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.Property<string>("PoolName")
+                        .HasColumnType("text");
+
+                    b.HasKey("Address", "UserId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("DevicesStats");
+                    b.ToTable("WalletAddress");
+                });
+
+            modelBuilder.Entity("RigRigGroup", b =>
+                {
+                    b.Property<long>("RigGroupsRigGroupId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("RigsRigId")
+                        .HasColumnType("text");
+
+                    b.HasKey("RigGroupsRigGroupId", "RigsRigId");
+
+                    b.HasIndex("RigsRigId");
+
+                    b.ToTable("RigRigGroup");
+                });
+
+            modelBuilder.Entity("DeviceDeviceGroup", b =>
+                {
+                    b.HasOne("RigMonitorAPI.Entities.DeviceGroup", null)
+                        .WithMany()
+                        .HasForeignKey("DeviceGroupsDeviceGroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RigMonitorAPI.Entities.Device", null)
+                        .WithMany()
+                        .HasForeignKey("DevicesDeviceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -322,13 +446,74 @@ namespace RigMonitorAPI.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RigMonitorAPI.Models.DeviceStats", b =>
+            modelBuilder.Entity("RigMonitorAPI.Entities.Device", b =>
+                {
+                    b.HasOne("RigMonitorAPI.Entities.Rig", "Rig")
+                        .WithMany("Devices")
+                        .HasForeignKey("RigId");
+
+                    b.Navigation("Rig");
+                });
+
+            modelBuilder.Entity("RigMonitorAPI.Entities.DeviceStats", b =>
+                {
+                    b.HasOne("RigMonitorAPI.Entities.Device", "Device")
+                        .WithMany("DeviceStats")
+                        .HasForeignKey("DeviceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Device");
+                });
+
+            modelBuilder.Entity("RigMonitorAPI.Entities.Rig", b =>
                 {
                     b.HasOne("RigMonitorAPI.Authentication.ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("Rigs")
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("RigMonitorAPI.Entities.WalletAddress", b =>
+                {
+                    b.HasOne("RigMonitorAPI.Authentication.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("RigRigGroup", b =>
+                {
+                    b.HasOne("RigMonitorAPI.Entities.RigGroup", null)
+                        .WithMany()
+                        .HasForeignKey("RigGroupsRigGroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RigMonitorAPI.Entities.Rig", null)
+                        .WithMany()
+                        .HasForeignKey("RigsRigId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("RigMonitorAPI.Authentication.ApplicationUser", b =>
+                {
+                    b.Navigation("Rigs");
+                });
+
+            modelBuilder.Entity("RigMonitorAPI.Entities.Device", b =>
+                {
+                    b.Navigation("DeviceStats");
+                });
+
+            modelBuilder.Entity("RigMonitorAPI.Entities.Rig", b =>
+                {
+                    b.Navigation("Devices");
                 });
 #pragma warning restore 612, 618
         }

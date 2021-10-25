@@ -242,8 +242,8 @@ namespace RigMonitorAPI.Migrations
                     b.Property<string>("DeviceName")
                         .HasColumnType("text");
 
-                    b.Property<long>("RigId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("RigId")
+                        .HasColumnType("text");
 
                     b.HasKey("DeviceId");
 
@@ -305,10 +305,8 @@ namespace RigMonitorAPI.Migrations
 
             modelBuilder.Entity("RigMonitorAPI.Entities.Rig", b =>
                 {
-                    b.Property<long>("RigId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .UseIdentityByDefaultColumn();
+                    b.Property<string>("RigId")
+                        .HasColumnType("text");
 
                     b.Property<string>("RigDescription")
                         .HasColumnType("text");
@@ -370,8 +368,8 @@ namespace RigMonitorAPI.Migrations
                     b.Property<long>("RigGroupsRigGroupId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("RigsRigId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("RigsRigId")
+                        .HasColumnType("text");
 
                     b.HasKey("RigGroupsRigGroupId", "RigsRigId");
 
@@ -450,9 +448,7 @@ namespace RigMonitorAPI.Migrations
                 {
                     b.HasOne("RigMonitorAPI.Entities.Rig", "Rig")
                         .WithMany("Devices")
-                        .HasForeignKey("RigId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RigId");
 
                     b.Navigation("Rig");
                 });

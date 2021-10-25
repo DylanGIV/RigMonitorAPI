@@ -56,7 +56,7 @@ namespace RigMonitorAPI.Controllers
         }
 
         [HttpGet("rigId")]
-        public ActionResult<DeviceStats> GetDeviceStats(long rigId)
+        public ActionResult<DeviceStats> GetDeviceStats(string rigId)
         {
             var userId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             var deviceStats = _context.DeviceStats.Where(ds => ds.Device.RigId == rigId && ds.Device.Rig.UserId == userId);

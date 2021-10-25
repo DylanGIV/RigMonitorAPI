@@ -58,7 +58,7 @@ namespace RigMonitorAPI.Controllers
         }
 
         [HttpGet("{rigId}")]
-        public ActionResult<Device> GetDevices(long rigId)
+        public ActionResult<Device> GetDevices(string rigId)
         {
             var userId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             if (string.IsNullOrEmpty(userId))

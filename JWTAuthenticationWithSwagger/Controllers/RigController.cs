@@ -38,6 +38,7 @@ namespace RigMonitorAPI.Controllers
             }
 
             rig.UserId = userId;
+            rig.RigId = addRigRequest.RigId;
             rig.RigName = addRigRequest.RigName;
             rig.RigDescription = addRigRequest.RigDescription;
 
@@ -63,7 +64,7 @@ namespace RigMonitorAPI.Controllers
         }
 
         [HttpGet("rigId")]
-        public ActionResult<Rig> GetRig(long rigId)
+        public ActionResult<Rig> GetRig(string rigId)
         {
             var userId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             var rig = _context.Rig.FirstOrDefault(r => r.UserId == userId && r.RigId == rigId);
